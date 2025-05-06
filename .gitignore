@@ -1,0 +1,21 @@
+# Unity generated folders
+swpp_team03/[Ll]ibrary/
+swpp_team03/[Tt]emp/
+swpp_team03/[Oo]bj/
+swpp_team03/[Bb]uild/
+swpp_team03/[Bb]uilds/
+swpp_team03/[Ll]ogs/
+swpp_team03/UserSettings/
+swpp_team03/MemoryCaptures/
+
+# IDE and system files
+*.csproj
+*.unityproj
+*.sln
+*.user
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+.DS_Store
