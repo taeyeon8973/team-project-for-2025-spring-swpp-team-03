@@ -10,8 +10,8 @@ public class StatusBar : MonoBehaviour
     public TextMeshProUGUI healthText;
     public TextMeshProUGUI energyText;
 
-    public float maxHealth = 100f;
-    public float maxEnergy = 100f;
+    private float maxHealth = 100f;
+    private float maxEnergy = 100f;
 
     private float currentHealth;
     private float currentEnergy;

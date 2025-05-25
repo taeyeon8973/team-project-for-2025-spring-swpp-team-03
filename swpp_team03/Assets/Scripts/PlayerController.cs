@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        rb.centerOfMass = new Vector3(0, -1.0f, 0); // 무게 중심을 아래로
+        rb.centerOfMass = new Vector3(0, -0.5f, 0); // 무게 중심을 아래로
     }
 
     // Update is called once per frame
