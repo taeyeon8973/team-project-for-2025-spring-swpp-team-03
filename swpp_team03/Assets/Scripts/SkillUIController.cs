@@ -55,8 +55,20 @@ public class SkillUIController : MonoBehaviour
     void skill_H()
     {
         // 청룡
-        Debug.Log("🔥 불덩이 발사!");
-        // 예: Instantiate(불덩이Prefab, transform.position, Quaternion.identity);
+        Debug.Log("근처 장애물 파괴!");
+        GameObject player = GameObject.FindWithTag("Player");
+        if (player != null)
+        {
+            AreaDestroy areaDestroy = player.GetComponent<AreaDestroy>();
+            if (areaDestroy != null)
+            {
+                areaDestroy.ManualTrigger();
+            }
+            else
+            {
+                Debug.LogWarning("🚫 AreaDestroy 스크립트가 없음!");
+            }
+        }
     }
 
     void skill_J()
@@ -83,8 +95,20 @@ public class SkillUIController : MonoBehaviour
     void skill_K()
     {
         // 주작
-        Debug.Log("🔥 불덩이 발사!");
-        // 예: Instantiate(불덩이Prefab, transform.position, Quaternion.identity);
+        Debug.Log("점프!");
+        GameObject player = GameObject.FindWithTag("Player");
+        if (player != null)
+        {
+            HighJump jumpSkill = player.GetComponent<HighJump>();
+            if (jumpSkill != null)
+            {
+                jumpSkill.ManualTrigger();
+            }
+            else
+            {
+                Debug.LogWarning("🚫 HighJump 스크립트가 없음!");
+            }
+        }
     }
 
     void skill_L()
