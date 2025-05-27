@@ -115,7 +115,18 @@ public class SkillUIController : MonoBehaviour
     {
         // 현무
         Debug.Log("🔥 불덩이 발사!");
-        // 예: Instantiate(불덩이Prefab, transform.position, Quaternion.identity);
+        GameObject player = GameObject.FindWithTag("Player");
+        if (player != null) {
+            HyunmuMode hyunmu = player.GetComponent<HyunmuMode>();
+            if (hyunmu != null)
+            {
+                hyunmu.ManualTrigger();
+            }
+            else
+            {
+                Debug.LogWarning("🚫 HyunmuMode 스크립트가 없음!");
+            }
+        }
     }
 
 }

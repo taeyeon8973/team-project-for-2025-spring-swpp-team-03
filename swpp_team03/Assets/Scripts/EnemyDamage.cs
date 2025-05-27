@@ -10,6 +10,9 @@ public class EnemyDamage : MonoBehaviour
         Debug.Log($"[충돌 감지] {other.gameObject.tag}"); // 로그 찍기
         if (other.CompareTag("Player"))
         {
+            HyunmuMode hyunmu = other.GetComponent<HyunmuMode>();
+            if (hyunmu != null && hyunmu.IsInvincible()) return;
+
             StatusBar status = FindObjectOfType<StatusBar>();
             if (status != null)
             {
