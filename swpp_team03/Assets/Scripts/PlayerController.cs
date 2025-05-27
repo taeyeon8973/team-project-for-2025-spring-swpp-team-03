@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
     public float rotationSpeed = 60f;
     public float uprightStability = 2f;
     public float groundCheckDistance = 1.0f;
+    public float centerOfGravityY = -1.5f;
+    public float gravityStrength = 1.0f;
 
     private Rigidbody rb;
     private bool isGrounded;
@@ -17,7 +19,8 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        rb.centerOfMass = new Vector3(0, -0.5f, 0); // 무게 중심을 아래로
+        rb.centerOfMass = new Vector3(0, centerOfGravityY, 0); // 무게 중심을 아래로
+        Physics.gravity = Physics.gravity * gravityStrength;
     }
 
     // Update is called once per frame
