@@ -19,7 +19,12 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        rb.centerOfMass = new Vector3(0, centerOfGravityY, 0); // 무게 중심을 아래로
+        //rb.centerOfMass = new Vector3(0, centerOfGravityY, 0); // 무게 중심을 아래로
+        Debug.Log(rb.centerOfMass);
+        Vector3 com = rb.centerOfMass;
+        com.y = centerOfGravityY;
+        rb.centerOfMass = com;
+
         Physics.gravity = Physics.gravity * gravityStrength;
     }
 
@@ -30,7 +35,7 @@ public class PlayerController : MonoBehaviour
         if (turn != 0)
         {
             Quaternion deltaRotation = Quaternion.Euler(Vector3.up * turn * rotationSpeed * Time.deltaTime);
-            rb.MoveRotation(rb.rotation * deltaRotation);
+            rb.MoveRotation(rb.rotation * deltaRotation);   
         }
     }
 
