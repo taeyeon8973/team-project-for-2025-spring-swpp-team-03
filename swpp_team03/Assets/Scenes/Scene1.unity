@@ -4146,7 +4146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b3c689e16cae4d2797ed628d8a8703a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dashSpeed: 5000
+  dashSpeed: 100
   dashDuration: 50
   hitEffect: {fileID: 0}
 --- !u!114 &543450653145746951
@@ -4295,11 +4295,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7276427113200579811, guid: 5d980a636cb27c745ba5eb7541152e0d, type: 3}
       propertyPath: moveForce
-      value: 24000
+      value: 2400
+      objectReference: {fileID: 0}
+    - target: {fileID: 7276427113200579811, guid: 5d980a636cb27c745ba5eb7541152e0d, type: 3}
+      propertyPath: gravityStrength
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7276427113200579813, guid: 5d980a636cb27c745ba5eb7541152e0d, type: 3}
       propertyPath: m_Mass
-      value: 600
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 7510427727597104260, guid: 5d980a636cb27c745ba5eb7541152e0d, type: 3}
       propertyPath: m_Name
