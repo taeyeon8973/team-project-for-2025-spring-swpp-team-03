@@ -4,20 +4,29 @@ using UnityEngine;
 
 public class EnemyMoving : MonoBehaviour
 {
-    public float centerX;  // 중심 x 좌표
-    public float centerZ;  // 중심 z 좌표
-
-    public float angularSpeed = 1f;
     public float detectionRadius = 5f;
-    public float pursuitSpeed = 3f;
-    public float circleRecalcRadius = 2f;
+    public float speed = 3f;
+    public float figureEightRadius = 3f;
+
+    public bool useFigureEight = true;
 
     private Rigidbody rb;
-    private float angle;
+    private float angle = 0f;
     private bool isChasing = false;
-    private Transform targetPlayer;
+    private Transform target;
+
+    private int rotatingLeft = 1;
+    private bool returningToJoint = false;
+    private float angularSpeed;
+
+    // 원형 순찰용 중심 (8자형이 아닐 때 사용)
     private Vector3 circleCenter;
-    private float circleRadius;
+    // 8자 순찰용 중심
+    private Vector3 jointPosition;
+    private Vector3 leftCenter;
+    private Vector3 rightCenter;
+    private Vector3 presentCenter;
+    private GameObject player;
 
     void Start()
     {
@@ -25,68 +34,119 @@ public class EnemyMoving : MonoBehaviour
         rb.useGravity = true;
         rb.constraints = RigidbodyConstraints.FreezeRotation;
 
-        // Terrain 높이 계산
-        float centerY = Terrain.activeTerrain.SampleHeight(new Vector3(centerX, 0, centerZ));
+        player = GameObject.FindWithTag("Player");
 
-        // 중심 위치 설정
-        circleCenter = new Vector3(centerX, centerY, centerZ);
-        circleRadius = Vector3.Distance(transform.position, circleCenter);
+        Vector3 startPos = transform.position;
+        float y = Terrain.activeTerrain.SampleHeight(startPos);
+
+        angularSpeed = speed / figureEightRadius;
+
+        jointPosition = new Vector3(startPos.x, y, startPos.z);
+
+        Vector3 left = jointPosition + new Vector3(-figureEightRadius, 0, 0);
+        Vector3 right = jointPosition + new Vector3(figureEightRadius, 0, 0);
+
+        left.y = Terrain.activeTerrain.SampleHeight(left);
+        right.y = Terrain.activeTerrain.SampleHeight(right);
+
+        leftCenter = left;
+        rightCenter = right;
+
+        // 원형 순찰용 초기 중심은 시작 위치
+        circleCenter = jointPosition;
+        presentCenter = leftCenter;
     }
 
     void FixedUpdate()
     {
         UpdateTarget();
 
-        if (isChasing && targetPlayer != null)
+        if (isChasing)
         {
-            Vector3 direction = (targetPlayer.position - transform.position).normalized;
-            Vector3 move = direction * pursuitSpeed * Time.fixedDeltaTime;
+            Vector3 direction = (target.position - transform.position).normalized;
+            Vector3 move = direction * speed * Time.fixedDeltaTime;
             rb.MovePosition(rb.position + SlideAlongObstacle(move));
+            return;
+        }
+
+        if (useFigureEight)
+        {
+            MoveInFigureEight();
         }
         else
         {
+            // 원형 순찰 이동
             angle += angularSpeed * Time.fixedDeltaTime;
 
-            float x = circleCenter.x + Mathf.Cos(angle) * circleRadius;
-            float z = circleCenter.z + Mathf.Sin(angle) * circleRadius;
+            float radius = figureEightRadius;
+            float x = circleCenter.x + Mathf.Cos(angle) * radius;
+            float z = circleCenter.z + Mathf.Sin(angle) * radius;
             Vector3 targetPos = new Vector3(x, rb.position.y, z);
             Vector3 move = targetPos - rb.position;
-
             rb.MovePosition(rb.position + SlideAlongObstacle(move));
         }
     }
 
+    void MoveInFigureEight()
+    {
+        angle += angularSpeed * Time.fixedDeltaTime * rotatingLeft;
+
+        float x = presentCenter.x + Mathf.Cos(angle) * figureEightRadius;
+        float z = presentCenter.z + Mathf.Sin(angle) * figureEightRadius;
+        Vector3 targetPos = new Vector3(x, rb.position.y, z);
+        Vector3 move = targetPos - rb.position;
+        if (angle >= 2f * Mathf.PI)
+        {
+            angle = Mathf.PI;
+            rotatingLeft = -1;
+            presentCenter = rightCenter;
+        } else if (angle <= -Mathf.PI) {
+            angle = 0;
+            rotatingLeft = 1;
+            presentCenter = leftCenter;
+        }
+        rb.MovePosition(rb.position + SlideAlongObstacle(move));
+    }
+
     void UpdateTarget()
     {
-        GameObject player = GameObject.FindWithTag("Player");
-        if (player == null) return;
-
         float dist = Vector3.Distance(transform.position, player.transform.position);
-
         if (dist <= detectionRadius)
         {
-            if (!isChasing)
-            {
-                isChasing = true;
-                targetPlayer = player.transform;
-            }
+            isChasing = true;
+            target = player.transform;
         }
         else
         {
             if (isChasing)
             {
-                isChasing = false;
-                targetPlayer = null;
+                Vector3 currentPos = transform.position;
+                if (!useFigureEight)
+                {
+                    float currentAngle = angle;
+                    float radius = figureEightRadius;
 
-                Vector3 forwardFlat = new Vector3(transform.forward.x, 0, transform.forward.z).normalized;
-                Vector3 newCenterXZ = transform.position + forwardFlat * circleRecalcRadius;
+                    Vector3 newCenter = currentPos - new Vector3(Mathf.Cos(currentAngle), 0, Mathf.Sin(currentAngle)) * radius;
+                    newCenter.y = Terrain.activeTerrain.SampleHeight(newCenter);
 
-                float newY = Terrain.activeTerrain.SampleHeight(newCenterXZ);
-                circleCenter = new Vector3(newCenterXZ.x, newY, newCenterXZ.z);
+                    circleCenter = newCenter;
+                }
+                else
+                {
+                    Vector3 left = currentPos + new Vector3(-figureEightRadius, 0, 0);
+                    Vector3 right = currentPos + new Vector3(figureEightRadius, 0, 0);
 
-                angle = 0f;
-                circleRadius = circleRecalcRadius;
+                    left.y = Terrain.activeTerrain.SampleHeight(left);
+                    right.y = Terrain.activeTerrain.SampleHeight(right);
+
+                    leftCenter = left;
+                    rightCenter = right;
+                    presentCenter = leftCenter;
+                    rotatingLeft = 1;
+                    angle = 0;
+                }
             }
+            isChasing = false;
         }
     }
 
