@@ -22,5 +22,6 @@ public class EnemyDamage : MonoBehaviour
             // 필요시 적 제거 (선택)
             // Destroy(gameObject);
         }
+        
     }
 }

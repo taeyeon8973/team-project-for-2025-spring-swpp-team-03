@@ -53,6 +53,12 @@ public class PlayerController : MonoBehaviour
         }
 
         UprightCorrection();
+
+        // 수평 속도 보정: 측면 슬라이딩 방지
+        Vector3 localVelocity = transform.InverseTransformDirection(rb.velocity);
+        localVelocity.x *= 0.95f; // 측면 슬라이딩 줄임
+        localVelocity.z *= 0.95f; // 급가속 보정
+        rb.velocity = transform.TransformDirection(localVelocity);
     }
 
     void UprightCorrection()
@@ -70,6 +76,4 @@ public class PlayerController : MonoBehaviour
     {
         // TODO : Item logic
     }
-
-
 }
