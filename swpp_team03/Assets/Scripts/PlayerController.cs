@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     public float moveForce = 20f;
     public float maxSpeed = 10f;
     public float rotationSpeed = 60f;
-    public float uprightStability = 2f;
+    public float uprightStability = 5f;
     public float groundCheckDistance = 1.0f;
     public float centerOfGravityY = -1.5f;
     public float gravityStrength = 1.0f;
@@ -48,9 +48,16 @@ public class PlayerController : MonoBehaviour
 
         if (isGrounded && move != 0)
         {
-            Vector3 force = transform.forward * move * moveForce;
+		    Vector3 force = transform.forward * move * moveForce;
+		    Vector3 forcePosition = rb.worldCenterOfMass + transform.up * 0.1f; 
+			if (rb.velocity.magnitude < maxSpeed)
+				rb.AddForceAtPosition(force, forcePosition);
+
+
+/*            Vector3 force = transform.forward * move * moveForce;
             if (rb.velocity.magnitude < maxSpeed)
                 rb.AddForce(force);
+*/
         }
 
         UprightCorrection();
