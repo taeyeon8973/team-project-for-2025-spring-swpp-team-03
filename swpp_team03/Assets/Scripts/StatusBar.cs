@@ -18,8 +18,6 @@ public class StatusBar : MonoBehaviour
     public GameObject gameOverText;
     private bool isGameOver = false;
 
-    private TimeCountdown timer;
-
     void Start()
     {
         currentHealth = maxHealth;
@@ -31,8 +29,6 @@ public class StatusBar : MonoBehaviour
         healthBar.value = currentHealth;
         energyBar.value = currentEnergy;
 
-        timer = FindObjectOfType<TimeCountdown>();
-        timer.SetTime(2,23);
         UpdateUI();
 
         InvokeRepeating(nameof(DecreaseEnergy), 1f, 1f);
@@ -58,12 +54,11 @@ public class StatusBar : MonoBehaviour
         if (!isGameOver && (currentHealth <= 0f || currentEnergy <= 0f))
         {
             isGameOver = true;
-            timer.PauseTimer();
             GameOver();
         }
     }
 
-    public void GameOver()
+    void GameOver()
     {
         Debug.Log("Game Over!");
         gameOverText.SetActive(true);
