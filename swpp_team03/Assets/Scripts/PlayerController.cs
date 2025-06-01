@@ -52,12 +52,6 @@ public class PlayerController : MonoBehaviour
 		    Vector3 forcePosition = rb.worldCenterOfMass + transform.up * 0.1f; 
 			if (rb.velocity.magnitude < maxSpeed)
 				rb.AddForceAtPosition(force, forcePosition);
-
-
-/*            Vector3 force = transform.forward * move * moveForce;
-            if (rb.velocity.magnitude < maxSpeed)
-                rb.AddForce(force);
-*/
         }
 
         UprightCorrection();
