@@ -1,6 +1,5 @@
 using UnityEngine;
 
-
 public class EnemyDamage : MonoBehaviour
 {
     public float damageAmount = 20f;
@@ -23,6 +22,5 @@ public class EnemyDamage : MonoBehaviour
             // 필요시 적 제거 (선택)
             // Destroy(gameObject);
         }
-        
     }
 }
