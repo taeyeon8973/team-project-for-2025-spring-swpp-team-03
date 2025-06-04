@@ -58,7 +58,7 @@ public class StatusBar : MonoBehaviour
         }
     }
 
-    void GameOver()
+    public void GameOver()
     {
         Debug.Log("Game Over!");
         gameOverText.SetActive(true);
