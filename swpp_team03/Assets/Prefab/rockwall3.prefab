@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 5536565829384815296}
   - component: {fileID: 2572386809900285754}
   - component: {fileID: 148321885640809082}
+  - component: {fileID: 5901889656689381937}
   m_Layer: 0
   m_Name: Icosphere.019
-  m_TagString: Untagged
+  m_TagString: Destructible
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -83,6 +84,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &5901889656689381937
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 412699800039823250}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -8154572329781106517, guid: 327fdef47db430e4c9734815cdc17257, type: 3}
 --- !u!1 &1605491089773977517
 GameObject:
   m_ObjectHideFlags: 0
@@ -94,9 +109,10 @@ GameObject:
   - component: {fileID: 4037159248262745059}
   - component: {fileID: 1398629646637533890}
   - component: {fileID: 5558788017351829481}
+  - component: {fileID: 395403993681939864}
   m_Layer: 0
   m_Name: Icosphere.020
-  m_TagString: Untagged
+  m_TagString: Destructible
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -166,6 +182,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &395403993681939864
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1605491089773977517}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 3627989003109963323, guid: 327fdef47db430e4c9734815cdc17257, type: 3}
 --- !u!1 &1635862557929745560
 GameObject:
   m_ObjectHideFlags: 0
@@ -177,9 +207,10 @@ GameObject:
   - component: {fileID: 7253080275698746516}
   - component: {fileID: 1888548960571399245}
   - component: {fileID: 1781091688203139126}
+  - component: {fileID: 8164731014487257637}
   m_Layer: 0
   m_Name: Icosphere.022
-  m_TagString: Untagged
+  m_TagString: Destructible
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -249,6 +280,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &8164731014487257637
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1635862557929745560}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 8474708746059798016, guid: 327fdef47db430e4c9734815cdc17257, type: 3}
 --- !u!1 &3629194300449030848
 GameObject:
   m_ObjectHideFlags: 0
@@ -260,7 +305,7 @@ GameObject:
   - component: {fileID: 4113664771152369786}
   m_Layer: 0
   m_Name: rockwall3
-  m_TagString: Untagged
+  m_TagString: Destructible
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -295,9 +340,10 @@ GameObject:
   - component: {fileID: 8289686974950065101}
   - component: {fileID: 7715023639236058966}
   - component: {fileID: 3993646863561805238}
+  - component: {fileID: 3958570352285577845}
   m_Layer: 0
   m_Name: Icosphere.021
-  m_TagString: Untagged
+  m_TagString: Destructible
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -367,3 +413,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &3958570352285577845
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5919201521915633662}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -6803791989080409795, guid: 327fdef47db430e4c9734815cdc17257, type: 3}

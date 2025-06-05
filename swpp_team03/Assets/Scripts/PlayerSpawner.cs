@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerSpawner : MonoBehaviour
 {
     public Transform[] spawnPoints;
-    public GameObject playerPrefab;
+    public GameObject player;
 
     void Start()
     {
@@ -24,7 +24,9 @@ public class PlayerSpawner : MonoBehaviour
         }
 
         Transform spawnPoint = spawnPoints[routeIndex];
-        GameObject player = Instantiate(playerPrefab, spawnPoint.position, spawnPoint.rotation);
+        player.transform.position = spawnPoint.position;
+        player.transform.rotation = spawnPoint.rotation;
+        Debug.Log("start");
 
         // 🔥 Tell the camera to follow the new player
         FollowCamera cameraScript = Camera.main.GetComponent<FollowCamera>();

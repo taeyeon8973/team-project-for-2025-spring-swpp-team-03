@@ -2857,7 +2857,7 @@ MonoBehaviour:
   - {fileID: 1781275833}
   - {fileID: 49453154}
   - {fileID: 1337740178}
-  playerPrefab: {fileID: 1103644895}
+  player: {fileID: 1103644895}
 --- !u!4 &835353135
 Transform:
   m_ObjectHideFlags: 0

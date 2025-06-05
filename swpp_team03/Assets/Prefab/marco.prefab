@@ -2125,6 +2125,7 @@ GameObject:
   - component: {fileID: 543450653145746947}
   - component: {fileID: 543450653145746951}
   - component: {fileID: 543450653145746952}
+  - component: {fileID: 543450653145746950}
   m_Layer: 0
   m_Name: marco
   m_TagString: Player
@@ -2187,7 +2188,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!23 &7276427113200579814
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2249,6 +2250,9 @@ MonoBehaviour:
   groundCheckDistance: 2
   centerOfGravityY: -1
   gravityStrength: 10
+  isImmune: 0
+  enemyDamage: 10
+  immuneTime: 3
 --- !u!114 &543450653145746947
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2264,6 +2268,7 @@ MonoBehaviour:
   dashSpeed: 100
   dashDuration: 50
   hitEffect: {fileID: 0}
+  isDashing: 0
 --- !u!114 &543450653145746951
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2276,9 +2281,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0de1d67dda85a49cb8347ccbc207b16a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 5
-  energyCost: 20
-  cooldown: 10
+  radius: 50
+  energyCost: 5
+  cooldown: 1
 --- !u!114 &543450653145746952
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2295,6 +2300,22 @@ MonoBehaviour:
   fallMultiplier: 0.5
   energyCost: 20
   cooldown: 8
+--- !u!114 &543450653145746950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7510427727597104260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f7ea5bea644748bb90e1e6de91dde7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  energyCost: 30
+  cooldown: 1
+  duration: 5
+  isInvincible: 0
 --- !u!1 &7586485195902019700
 GameObject:
   m_ObjectHideFlags: 0

@@ -43,6 +43,7 @@ public class AreaDestroy : MonoBehaviour
         {
             if (c.CompareTag("Destructible") || c.CompareTag("Enemy"))
             {
+                Debug.Log(c);
                 Destroy(c.gameObject);
             }
         }

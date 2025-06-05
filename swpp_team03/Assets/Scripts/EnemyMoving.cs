@@ -100,7 +100,9 @@ public class EnemyMoving : MonoBehaviour
             angle = Mathf.PI;
             rotatingLeft = -1;
             presentCenter = rightCenter;
-        } else if (angle <= -Mathf.PI) {
+        }
+        else if (angle <= -Mathf.PI)
+        {
             angle = 0;
             rotatingLeft = 1;
             presentCenter = leftCenter;
