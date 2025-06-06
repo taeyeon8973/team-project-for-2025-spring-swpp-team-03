@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     public float immuneTime = 3.0f;
     private GameObject gameManager;
     private StatusBar statusBarScript;
+    private RouteManageInPlaying routeManageInPlayingScript;
     private DashForward dashForwardScript;
     private HyunmuMode hyunmuModeScript;
 
@@ -33,6 +34,7 @@ public class PlayerController : MonoBehaviour
         Physics.gravity = Physics.gravity * gravityStrength;
         gameManager = GameObject.Find("GameManager");
         statusBarScript = gameManager.GetComponent<StatusBar>();
+        routeManageInPlayingScript = gameManager.GetComponent<RouteManageInPlaying>();
         dashForwardScript = GetComponent<DashForward>();
         hyunmuModeScript = GetComponent<HyunmuMode>();
     }
@@ -93,6 +95,10 @@ public class PlayerController : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         // TODO : Item logic
+        if (other.gameObject.CompareTag("Light"))
+        {
+            routeManageInPlayingScript.Next();
+        }
     }
 
 

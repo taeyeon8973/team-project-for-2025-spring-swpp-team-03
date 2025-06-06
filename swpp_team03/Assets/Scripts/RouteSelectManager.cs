@@ -6,7 +6,8 @@ using UnityEngine.SceneManagement;
 public class RouteSelectManager : MonoBehaviour
 {
     public GameObject[] maps;                  
-    public string[] routeDescriptions;         
+    public string[] routeDescriptions;
+    public int[] routeInts;
     public TextMeshProUGUI routeDescription;   
     public Button startButton;                 
 
@@ -31,6 +32,7 @@ public class RouteSelectManager : MonoBehaviour
         if (RouteManager.Instance != null)
         {
             RouteManager.Instance.selectedRoute = index;
+            RouteManager.Instance.route = routeInts[index];
         }
 
         // Load shared gameplay scene

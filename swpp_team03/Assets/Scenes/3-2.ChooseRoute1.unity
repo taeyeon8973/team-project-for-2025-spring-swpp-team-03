@@ -2140,6 +2140,7 @@ MonoBehaviour:
   - Explanation4
   - Explanation5
   - Explanation6
+  routeInts: 200000002b000000fc020000da03000003010000703e0000
   routeDescription: {fileID: 491928144}
   startButton: {fileID: 1899524553}
 --- !u!4 &1292276920
@@ -2695,6 +2696,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectedRoute: -1
+  route: 0
 --- !u!4 &1761556011
 Transform:
   m_ObjectHideFlags: 0
