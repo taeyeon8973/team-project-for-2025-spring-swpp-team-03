@@ -4,6 +4,7 @@ public class RouteManager : MonoBehaviour
 {
     public static RouteManager Instance;
     public int selectedRoute = -1;
+    public int route = 0;
 
     void Awake()
     {
