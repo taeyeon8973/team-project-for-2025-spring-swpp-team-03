@@ -7,14 +7,12 @@ public class DashForward : MonoBehaviour
     public GameObject hitEffect;
 
     private float dashTimer;
-    private bool isDashing = false;
-
+    public bool isDashing = false;
     private Rigidbody rb;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        Debug.Log("DashForward Start");
         if (rb == null)
         {
             Debug.LogError("❌ Rigidbody가 필요합니다!");
@@ -62,7 +60,7 @@ public class DashForward : MonoBehaviour
 
         string tag = collision.gameObject.tag;
 
-        if (tag == "Enemy")
+        if (tag == "Enemy" || tag == "Destructible")
         {
             Destroy(collision.gameObject);
         }

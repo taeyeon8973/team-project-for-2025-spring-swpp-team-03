@@ -10,7 +10,7 @@ public class HyunmuMode : MonoBehaviour
     private float nextAvailableTime = 0f;
 
     private StatusBar statusBar;
-    private bool isInvincible = false;
+    public bool isInvincible = false;
 
     void Start()
     {
