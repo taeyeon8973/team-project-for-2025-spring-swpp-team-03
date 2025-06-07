@@ -3338,7 +3338,6 @@ GameObject:
   m_Component:
   - component: {fileID: 886219387}
   - component: {fileID: 886219386}
-  - component: {fileID: 886219385}
   - component: {fileID: 886219388}
   m_Layer: 0
   m_Name: Minimap Camera
@@ -3347,14 +3346,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &886219385
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 886219383}
-  m_Enabled: 1
 --- !u!20 &886219386
 Camera:
   m_ObjectHideFlags: 0
@@ -15431,7 +15422,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1103644895}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.5880127, y: 1.0180435, z: 0.64019775}
