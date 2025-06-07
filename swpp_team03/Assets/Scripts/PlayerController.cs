@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     private RouteManageInPlaying routeManageInPlayingScript;
     private DashForward dashForwardScript;
     private HyunmuMode hyunmuModeScript;
+    private bool lightTrigger = true;
 
     // Start is called before the first frame update
     void Start()
@@ -46,7 +47,7 @@ public class PlayerController : MonoBehaviour
         if (turn != 0)
         {
             Quaternion deltaRotation = Quaternion.Euler(Vector3.up * turn * rotationSpeed * Time.deltaTime);
-            rb.MoveRotation(rb.rotation * deltaRotation);   
+            rb.MoveRotation(rb.rotation * deltaRotation);
         }
     }
 
@@ -95,11 +96,18 @@ public class PlayerController : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         // TODO : Item logic
-        if (other.gameObject.CompareTag("Light"))
+        if (other.gameObject.CompareTag("Light") && lightTrigger)
         {
             routeManageInPlayingScript.Next();
+            StartCoroutine(LightTriggerCoroutine());
         }
     }
 
+    private IEnumerator LightTriggerCoroutine()
+    {
+        lightTrigger = false;
+        yield return new WaitForSeconds(1f);
+        lightTrigger = true;
+    }
 
 }
