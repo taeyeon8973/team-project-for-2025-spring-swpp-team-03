@@ -52,6 +52,47 @@ public class SkillUIController : MonoBehaviour
         Debug.Log($"💥 Skill {key} activated!");
 
         string lowerKey = key.ToLower();
+		if (lowerKey == "h")
+		{
+			if (cooldown_h.IsOnCooldown())
+			{
+				Debug.Log("h : 쿨다운중");
+				return;
+			}
+			cooldown_h.cooldownDuration = 10;
+			cooldown_h.TriggerCooldown();
+		} 
+		if (lowerKey == "j")
+		{
+			if (cooldown_j.IsOnCooldown())
+			{
+				Debug.Log("j : 쿨다운중");
+				return;
+			}
+			cooldown_j.cooldownDuration = 12;
+			cooldown_j.TriggerCooldown();
+		} 
+		if (lowerKey == "k")
+		{
+			if (cooldown_k.IsOnCooldown())
+			{
+				Debug.Log("k : 쿨다운중");
+				return;
+			}
+			cooldown_k.cooldownDuration = 8;
+			cooldown_k.TriggerCooldown();
+		} 
+		if (lowerKey == "l")
+		{
+			if (cooldown_l.IsOnCooldown())
+			{
+				Debug.Log("l : 쿨다운중");
+				return;
+			}
+			cooldown_l.cooldownDuration = 15;
+			cooldown_l.TriggerCooldown();
+		} 
+		
         
         if (skillCommands.ContainsKey(lowerKey))
         {
