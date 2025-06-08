@@ -27,6 +27,12 @@ public class EnemyMoving : MonoBehaviour
     private Vector3 rightCenter;
     private Vector3 presentCenter;
     private GameObject player;
+    
+    // Strategy Pattern 추가
+    private IMovementStrategy currentStrategy;
+    private FigureEightMovementStrategy figureEightStrategy;
+    private CircularMovementStrategy circularStrategy;
+    private ChasingMovementStrategy chasingStrategy;
 
     void Start()
     {
@@ -55,6 +61,34 @@ public class EnemyMoving : MonoBehaviour
         // 원형 순찰용 초기 중심은 시작 위치
         circleCenter = jointPosition;
         presentCenter = leftCenter;
+        
+        // Strategy Pattern 초기화
+        InitializeStrategies();
+    }
+    
+    void InitializeStrategies()
+    {
+        figureEightStrategy = new FigureEightMovementStrategy();
+        circularStrategy = new CircularMovementStrategy();
+        chasingStrategy = new ChasingMovementStrategy();
+        
+        // 초기 전략 설정
+        if (useFigureEight)
+        {
+            currentStrategy = figureEightStrategy;
+        }
+        else
+        {
+            currentStrategy = circularStrategy;
+        }
+        
+        currentStrategy.Initialize(this, transform.position);
+    }
+    
+    public void SetMovementStrategy(IMovementStrategy strategy)
+    {
+        currentStrategy = strategy;
+        currentStrategy.Initialize(this, transform.position);
     }
 
     void FixedUpdate()
@@ -63,30 +97,45 @@ public class EnemyMoving : MonoBehaviour
 
         if (isChasing)
         {
-            Vector3 direction = (target.position - transform.position).normalized;
-            Vector3 move = direction * speed * Time.fixedDeltaTime;
-            rb.MovePosition(rb.position + SlideAlongObstacle(move));
+            // 추격 전략 사용
+            if (currentStrategy != chasingStrategy)
+            {
+                currentStrategy = chasingStrategy;
+                currentStrategy.Initialize(this, transform.position);
+            }
+            currentStrategy.Move(this, rb);
             return;
         }
 
-        if (useFigureEight)
+        // 일반 이동 전략 사용
+        if (currentStrategy == chasingStrategy)
         {
-            MoveInFigureEight();
+            // 추격에서 돌아왔을 때 원래 전략으로 복귀
+            if (useFigureEight)
+            {
+                currentStrategy = figureEightStrategy;
+                // 8자 이동 중심점 재설정
+                if (figureEightStrategy != null)
+                {
+                    figureEightStrategy.UpdateCentersAfterChasing(transform.position, figureEightRadius);
+                }
+            }
+            else
+            {
+                currentStrategy = circularStrategy;
+                // 원형 이동 중심점 재설정
+                if (circularStrategy != null)
+                {
+                    circularStrategy.UpdateCenterAfterChasing(transform.position, angle, figureEightRadius);
+                }
+            }
+            currentStrategy.Initialize(this, transform.position);
         }
-        else
-        {
-            // 원형 순찰 이동
-            angle += angularSpeed * Time.fixedDeltaTime;
-
-            float radius = figureEightRadius;
-            float x = circleCenter.x + Mathf.Cos(angle) * radius;
-            float z = circleCenter.z + Mathf.Sin(angle) * radius;
-            Vector3 targetPos = new Vector3(x, rb.position.y, z);
-            Vector3 move = targetPos - rb.position;
-            rb.MovePosition(rb.position + SlideAlongObstacle(move));
-        }
+        
+        currentStrategy.Move(this, rb);
     }
 
+    // 기존 메서드들 - 하위 호환성을 위해 유지
     void MoveInFigureEight()
     {
         angle += angularSpeed * Time.fixedDeltaTime * rotatingLeft;
@@ -152,7 +201,7 @@ public class EnemyMoving : MonoBehaviour
         }
     }
 
-    Vector3 SlideAlongObstacle(Vector3 move)
+    public Vector3 SlideAlongObstacle(Vector3 move)
     {
         RaycastHit hit;
         if (Physics.Raycast(transform.position, move.normalized, out hit, move.magnitude + 0.1f))
@@ -161,5 +210,11 @@ public class EnemyMoving : MonoBehaviour
             return slideDirection;
         }
         return move;
+    }
+    
+    // Strategy Pattern 공개 메서드
+    public string GetCurrentStrategyName()
+    {
+        return currentStrategy?.GetStrategyName() ?? "None";
     }
 }
