@@ -15,11 +15,14 @@ public class StatusBar : MonoBehaviour
 
     private float currentHealth;
     private float currentEnergy;
-    public GameObject gameOverText;
+    public GameObject gameOverCanvas;
     private bool isGameOver = false;
 
     void Start()
     {
+        Time.timeScale = 1f;
+        gameOverCanvas.SetActive(false);
+
         currentHealth = maxHealth;
         currentEnergy = maxEnergy;
 
@@ -61,7 +64,7 @@ public class StatusBar : MonoBehaviour
     public void GameOver()
     {
         Debug.Log("Game Over!");
-        gameOverText.SetActive(true);
+        gameOverCanvas.SetActive(true);
         Time.timeScale = 0f;
     }
 

@@ -2126,7 +2126,6 @@ GameObject:
   - component: {fileID: 543450653145746951}
   - component: {fileID: 543450653145746952}
   - component: {fileID: 543450653145746950}
-  - component: {fileID: 934530594486501726}
   m_Layer: 0
   m_Name: marco
   m_TagString: Player
@@ -2317,19 +2316,6 @@ MonoBehaviour:
   cooldown: 1
   duration: 5
   isInvincible: 0
---- !u!65 &934530594486501726
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7510427727597104260}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.5880127, y: 1.0180435, z: 0.64019775}
-  m_Center: {x: -0.018005371, y: -0.009021759, z: -0.022003174}
 --- !u!1 &7586485195902019700
 GameObject:
   m_ObjectHideFlags: 0

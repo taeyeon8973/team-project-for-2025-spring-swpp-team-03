@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
         com.y = centerOfGravityY;
         rb.centerOfMass = com;
 
-        Physics.gravity = Physics.gravity * gravityStrength;
+        Physics.gravity = new Vector3(0, -9.81f * gravityStrength, 0);
         gameManager = GameObject.Find("GameManager");
         statusBarScript = gameManager.GetComponent<StatusBar>();
         routeManageInPlayingScript = gameManager.GetComponent<RouteManageInPlaying>();
