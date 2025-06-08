@@ -22,7 +22,6 @@ public class PlayerSpawner : MonoBehaviour
             Debug.LogError("Invalid route index: " + routeIndex);
             yield break;
         }
-
         Transform spawnPoint = spawnPoints[routeIndex];
         player.transform.position = spawnPoint.position;
         player.transform.rotation = spawnPoint.rotation;
