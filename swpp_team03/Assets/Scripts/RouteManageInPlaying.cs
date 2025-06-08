@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class RouteManageInPlaying : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class RouteManageInPlaying : MonoBehaviour
     private int routeInt;
     public Transform[] lightTransforms;
     public GameObject lightObject;
+    public TextMeshProUGUI nextBaseText;
     void Start()
     {
         if (GameObject.Find("RouteManager_1"))
@@ -23,6 +25,7 @@ public class RouteManageInPlaying : MonoBehaviour
             routeInt = 32;
         }
         lightObject.transform.position = lightTransforms[routeInt % 10].position;
+        nextBaseText.text = $"Next Base : {routeInt%10}";
         routeInt = routeInt / 10;
     }
 
@@ -43,6 +46,7 @@ public class RouteManageInPlaying : MonoBehaviour
         {
             int nextindex = routeInt % 10;
             routeInt = routeInt / 10;
+            nextBaseText.text = $"Next Base : {nextindex}";
             lightObject.transform.position = lightTransforms[nextindex].position;
         }
     }
