@@ -8,6 +8,11 @@ public class SkillUIController : MonoBehaviour
     public Button button_k;
     public Button button_l;
 
+	public SkillCooldown cooldown_h;
+	public SkillCooldown cooldown_j;
+	public SkillCooldown cooldown_k;
+	public SkillCooldown cooldown_l;
+
     void Start()
     {
         button_h.onClick.AddListener(() => UseSkill("H"));
@@ -55,6 +60,12 @@ public class SkillUIController : MonoBehaviour
     void skill_H()
     {
         // 청룡
+		if (cooldown_h.IsOnCooldown())
+		{
+			Debug.Log("쿨다운중");
+			return;
+		}
+
         Debug.Log("근처 장애물 파괴!");
         GameObject player = GameObject.FindWithTag("Player");
         if (player != null)
@@ -63,6 +74,8 @@ public class SkillUIController : MonoBehaviour
             if (areaDestroy != null)
             {
                 areaDestroy.ManualTrigger();
+				cooldown_h.cooldownDuration = 10;
+				cooldown_h.TriggerCooldown();
             }
             else
             {
@@ -74,7 +87,13 @@ public class SkillUIController : MonoBehaviour
     void skill_J()
     {
         // 백호
-            Debug.Log("🐯 백호 스킬 발동: 돌진!");
+		if (cooldown_j.IsOnCooldown())
+		{
+			Debug.Log("쿨다운중");
+			return;
+        }
+
+		Debug.Log("🐯 백호 스킬 발동: 돌진!");
 
         // 플레이어에게 DashForward 컴포넌트가 있어야 함
         GameObject player = GameObject.FindWithTag("Player");
@@ -84,6 +103,8 @@ public class SkillUIController : MonoBehaviour
             if (dash != null)
             {
                 dash.StartDash();
+				cooldown_j.cooldownDuration = 12;
+				cooldown_j.TriggerCooldown();
             }
             else
             {
@@ -95,6 +116,11 @@ public class SkillUIController : MonoBehaviour
     void skill_K()
     {
         // 주작
+		if (cooldown_k.IsOnCooldown())
+		{
+			Debug.Log("쿨다운중");
+			return;
+        }
         Debug.Log("점프!");
         GameObject player = GameObject.FindWithTag("Player");
         if (player != null)
@@ -103,6 +129,8 @@ public class SkillUIController : MonoBehaviour
             if (jumpSkill != null)
             {
                 jumpSkill.ManualTrigger();
+				cooldown_k.cooldownDuration = 8;
+				cooldown_k.TriggerCooldown();
             }
             else
             {
@@ -114,13 +142,20 @@ public class SkillUIController : MonoBehaviour
     void skill_L()
     {
         // 현무
-        Debug.Log("🔥 불덩이 발사!");
+		if (cooldown_l.IsOnCooldown())
+		{
+			Debug.Log("쿨다운중");
+			return;
+        }
+        Debug.Log("현무모드");
         GameObject player = GameObject.FindWithTag("Player");
         if (player != null) {
             HyunmuMode hyunmu = player.GetComponent<HyunmuMode>();
             if (hyunmu != null)
             {
                 hyunmu.ManualTrigger();
+				cooldown_l.cooldownDuration = 20;
+				cooldown_l.TriggerCooldown();
             }
             else
             {
