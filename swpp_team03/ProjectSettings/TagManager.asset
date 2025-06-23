@@ -8,6 +8,7 @@ TagManager:
   - Light
   - Enemy
   - Destructible
+  - Player_Child
   layers:
   - Default
   - TransparentFX
