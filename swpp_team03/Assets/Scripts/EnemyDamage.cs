@@ -8,7 +8,7 @@ public class EnemyDamage : MonoBehaviour
     {
         Debug.Log($"[충돌 감지] {other.name}"); // 로그 찍기
         Debug.Log($"[충돌 감지] {other.gameObject.tag}"); // 로그 찍기
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player_Child"))
         {
             HyunmuMode hyunmu = other.GetComponent<HyunmuMode>();
             if (hyunmu != null && hyunmu.IsInvincible()) return;
